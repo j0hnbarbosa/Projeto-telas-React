@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-
+import NavBar from '../navBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,6 +44,8 @@ const CadastrarUsuario = () => {
 
   return  (
   <div>
+          <NavBar />
+
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>

@@ -4,9 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import IconButton from '@material-ui/core/IconButton';
-// import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,24 +22,12 @@ const NavBar = (props) => {
   const classes = useStyles();
   return(
   <AppBar position="static">
-    <Toolbar>
-      {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-        <MenuIcon />
-      </IconButton> */}
-      <Link
-        component="button"
-        // variant="body2"
-        onClick={() => {
-          console.info("I'm a button.");
-        }}
-      >
-        Button Link
-      </Link>
-      <Typography variant="h6" className={classes.title}>
-        NAVBAR
-      </Typography>
-      <Button color="inherit">Login</Button>
-    </Toolbar>
+    <di style={{display: 'flex', flexDirection: 'vertical', justifyContent: 'space-between'}}>
+    <Link to="/cadastrarCliente" style={{color: '#CECECE'}}>Cadastrar Cliente</Link>
+    <Link to="/login" style={{color: '#CECECE'}}>LOGIN</Link>
+    <Link to="/cadastrarUsuario" style={{color: '#CECECE'}}>Cadastrar Usuario</Link>
+    <Link to="/recuperarSenhaVerificaEmail" style={{color: '#CECECE'}}>Recuperar Senha</Link>
+    </di>
   </AppBar>
   )
 }
