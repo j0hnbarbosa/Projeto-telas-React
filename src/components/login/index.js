@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import NavBar from '../../utils/navBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,14 +20,21 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const [usuario, setUsuario] = useState(null);
+  const [retorno, setRetorno] = useState(null);
   // useEffect(() => {
     const fetchData = () => {
       if (usuario) {
-      axios.post(`http://127.0.0.1:5000/login`, usuario)
+      axios.post(`http://127.0.0.1:5000/login`, usuario, {      
+        headers: {                  
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization", 
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+        // "Content-Type": "application/json;charset=UTF-8"                   
+    },})
       .then(res => {
         console.log(res);
         console.log('Sua Reposta', res.data);
-        setUsuario(res.data);
+        // setRetorno(res.data);
       })
     }
   }
@@ -43,6 +51,8 @@ const Login = () => {
 
   return  (
   <div>
+    <NavBar />
+
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>

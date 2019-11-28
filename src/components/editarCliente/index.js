@@ -18,12 +18,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CadastrarUsuario = () => {
+const EditarCliente = () => {
   const [usuario, setUsuario] = useState(null);
   // useEffect(() => {
     const fetchData = () => {
       if (usuario) {
-      axios.post(`http://127.0.0.1:5000/cadastrarUsuario`, usuario)
+      axios.post(`http://127.0.0.1:5000/editarCliente`, usuario)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -49,9 +49,23 @@ const CadastrarUsuario = () => {
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>
-        <TextField name="nome" label="Nome" onChange={(event) => onchange(event)} />
+      <TextField name="nome" label="Nome" onChange={(event) => onchange(event)} />
       </Grid>
+      <Grid item xs={3}>
+        <TextField name="sobrenome" label="Sobrenome" onChange={(event) => onchange(event)} />  
+      </Grid>
+      <Grid item xs={3}>
+        <TextField name="cpf" label="Cpf" onChange={(event) => onchange(event)} />
+      </Grid>
+    </Grid>
 
+    <Grid container spacing={1}>
+      <Grid item xs={3}>
+      <TextField name="endereco" label="Endereço" onChange={(event) => onchange(event)} />
+      </Grid>
+      <Grid item xs={3}>
+        <TextField name="telefone" label="Telefone" onChange={(event) => onchange(event)} />
+      </Grid>
       <Grid item xs={3}>
         <TextField name="email" label="Email" onChange={(event) => onchange(event)} />
       </Grid>
@@ -74,4 +88,4 @@ const CadastrarUsuario = () => {
 )
 }
 
-export default CadastrarUsuario;
+export default EditarCliente;

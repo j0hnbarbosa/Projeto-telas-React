@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import NavBar from '../../utils/navBar';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
 
@@ -18,19 +19,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CadastrarUsuario = () => {
+const Login = () => {
   const [usuario, setUsuario] = useState(null);
   // useEffect(() => {
     const fetchData = () => {
       if (usuario) {
-      axios.post(`http://127.0.0.1:5000/cadastrarUsuario`, usuario)
+      axios.post(`http://127.0.0.1:5000/trocarSenha`, usuario, {      
+        headers: {                  
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization", 
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+        // "Content-Type": "application/json;charset=UTF-8"                   
+    },})
       .then(res => {
         console.log(res);
-        console.log(res.data);
+        console.log('Sua Reposta', res.data);
         // setUsuario(res.data);
       })
     }
-    }
+  }
   //   fetchData();
   // }, []);
 
@@ -44,34 +51,24 @@ const CadastrarUsuario = () => {
 
   return  (
   <div>
-          <NavBar />
-
+    <NavBar />
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>
-        <TextField name="nome" label="Nome" onChange={(event) => onchange(event)} />
+      <TextField name="email" label="Email" disabled onChange={(event) => onchange(event)} />
       </Grid>
-
       <Grid item xs={3}>
-        <TextField name="email" label="Email" onChange={(event) => onchange(event)} />
+        <TextField name="senha" label="Nova Senha" onChange={(event) => onchange(event)} />  
+      </Grid>
+      <Grid item xs={3}>
+        <Button variant="contained" onClick={() => fetchData()}>SALVAR</Button>
       </Grid>
     </Grid>
 
-    <Grid container spacing={1}>
-      <Grid item xs={3}>
-        <TextField name="senha" label="Senha" onChange={(event) => onchange(event)} />
-      </Grid>
-      {/* <Grid item xs={3}>
-        <TextField name="confirmaSenha" label="Confirmar Senha" onChange={(event) => onchange(event)} />
-      </Grid> */}
-       <Grid item xs={3} />
-      <Grid item xs={3}>
-        <Button variant="contained" onClick={() => fetchData()}>salvar</Button>
-      </Grid>
-    </Grid>
+       
   </div>
   </div>
 )
 }
 
-export default CadastrarUsuario;
+export default Login;

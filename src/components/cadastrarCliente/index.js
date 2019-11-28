@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import NavBar from '../navBar';
+import NavBar from '../../utils/navBar';
+import fetchData from '../../utils/fetchData';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,19 +20,6 @@ const useStyles = makeStyles(theme => ({
 
 const CadastrarCliente = () => {
   const [usuario, setUsuario] = useState(null);
-  // useEffect(() => {
-    const fetchData = () => {
-      if (usuario) {
-      axios.post(`http://127.0.0.1:5000/cadastrarCliente`, usuario)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        setUsuario(res.data);
-      })
-    }
-    }
-  //   fetchData();
-  // }, []);
 
   const classes = useStyles();
   const onchange = (event) => {
@@ -75,12 +62,9 @@ const CadastrarCliente = () => {
       <Grid item xs={3}>
         <TextField name="senha" label="Senha" onChange={(event) => onchange(event)} />
       </Grid>
-      {/* <Grid item xs={3}>
-        <TextField name="confirmaSenha" label="Confirmar Senha" onChange={(event) => onchange(event)} />
-      </Grid> */}
        <Grid item xs={3} />
       <Grid item xs={3}>
-        <Button variant="contained" onClick={() => fetchData()}>salvar</Button>
+        <Button variant="contained" onClick={() => fetchData(usuario, 'cadastrarCliente')}>salvar</Button>
       </Grid>
     </Grid>
   </div>

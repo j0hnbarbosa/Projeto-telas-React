@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import NavBar from '../navBar';
+import NavBar from '../../utils/navBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +27,7 @@ const Login = () => {
       .then(res => {
         console.log(res);
         console.log('Sua Reposta', res.data);
-        setUsuario(res.data);
+        // setUsuario(res.data);
       })
     }
   }
