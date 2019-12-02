@@ -47,10 +47,10 @@ const EditarCliente = () => {
             console.log(res);
             console.log(res.data[0]);
             if(res && res.data){
-              const valor = res.data;
+              let valor = res.data;
+              valor = valor.filter(vlr => vlr.id+"" === clienteId)
               console.log(valor);
-              debugger
-              setClientes(valor.map(vlr => vlr.id+"" === clienteId));
+              setClientes({...valor[0]});
             }
           }).catch(e => console.log(e));
         }
@@ -72,31 +72,31 @@ const EditarCliente = () => {
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>
-      <TextField name="nome" value={clientes && clientes.nome} label="Nome" onChange={(event) => onchange(event)} />
+      <TextField name="nome" value={clientes && clientes.nome} onChange={(event) => onchange(event)} />
       </Grid>
       <Grid item xs={3}>
-        <TextField name="sobrenome" label="Sobrenome" onChange={(event) => onchange(event)} />  
+        <TextField name="sobrenome" value={clientes && clientes.sobrenome} onChange={(event) => onchange(event)} />  
       </Grid>
       <Grid item xs={3}>
-        <TextField name="cpf" label="Cpf" onChange={(event) => onchange(event)} />
-      </Grid>
-    </Grid>
-
-    <Grid container spacing={1}>
-      <Grid item xs={3}>
-      <TextField name="endereco" label="Endereço" onChange={(event) => onchange(event)} />
-      </Grid>
-      <Grid item xs={3}>
-        <TextField name="telefone" label="Telefone" onChange={(event) => onchange(event)} />
-      </Grid>
-      <Grid item xs={3}>
-        <TextField name="email" label="Email" onChange={(event) => onchange(event)} />
+        <TextField name="cpf" value={clientes && clientes.cpf} onChange={(event) => onchange(event)} />
       </Grid>
     </Grid>
 
     <Grid container spacing={1}>
       <Grid item xs={3}>
-        <TextField name="senha" label="Senha" onChange={(event) => onchange(event)} />
+      <TextField name="endereco" value={clientes && clientes.endereco} onChange={(event) => onchange(event)} />
+      </Grid>
+      <Grid item xs={3}>
+        <TextField name="telefone" value={clientes && clientes.telefone} onChange={(event) => onchange(event)} />
+      </Grid>
+      <Grid item xs={3}>
+        <TextField name="email" value={clientes && clientes.email} onChange={(event) => onchange(event)} />
+      </Grid>
+    </Grid>
+
+    <Grid container spacing={1}>
+      <Grid item xs={3}>
+        <TextField name="senha" value={clientes && clientes.senha} onChange={(event) => onchange(event)} />
       </Grid>
       {/* <Grid item xs={3}>
         <TextField name="confirmaSenha" label="Confirmar Senha" onChange={(event) => onchange(event)} />

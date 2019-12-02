@@ -14,7 +14,7 @@ const NavBar = (props) => {
 
       {/* <Link to="/login" style={{color: '#CECECE'}}>LOGIN</Link> */}
       <Link to="/cadastrarCliente" style={{color: '#CECECE'}}>Cadastrar Cliente</Link>
-      <Link to="/cadastrarUsuario" style={{color: '#CECECE'}}>Cadastrar Usuario</Link>
+      {/* <Link to="/cadastrarUsuario" style={{color: '#CECECE'}}>Cadastrar Usuario</Link> */}
       <Link to="/recuperarSenhaVerificaEmail" style={{color: '#CECECE'}}>Recuperar Senha</Link>
       <Link to="/trocarSenha" style={{color: '#CECECE'}}>Trocar Senha</Link>
       <Link to="/cadastrarVeiculo" style={{color: '#CECECE'}}>Cadastrar Veiculo</Link>
