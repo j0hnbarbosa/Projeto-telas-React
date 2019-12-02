@@ -15,7 +15,8 @@ import Sobre from './components/sobre';
 const Rotas = () => (
   <BrowserRouter>
     <Switch>
-        <Route path="/login" exact={true} component={Login} />
+        <Route path="/" exact={true} component={Login} />
+        {/* <Route path="/login" component={Login} /> */}
         <Route path="/cadastrarCliente" component={CadastrarCliente} />
         <Route path="/cadastrarUsuario" component={CadastrarUsuario} />
         <Route path="/recuperarSenhaVerificaEmail" component={RecuperarSenha} />

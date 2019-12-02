@@ -1,41 +1,39 @@
-import React, {useState} from 'react';
-import { Table, TableCell, TableRow, TableHead  } from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
+import { Table, TableCell, TableRow, TableHead, Button  } from '@material-ui/core';
 import NavBar from '../../utils/navBar';
 import axios from 'axios';
 
-const clientesTeste = () => {
-  return [
-        {
-          nome: 'Raichu',
-          sobrenome: 'CHUU',
-          cpf: 1500,
-          endereco: 'Rua Choque',
-          telefone: '989898988', 
-          email: "Ray@chuu.cho",
-          senha: 'SSSO ',
-        }
-        ]
-};
-
 const ListarCliente = () => {
-  const clientes =  clientesTeste();
-  const [usuario, setUsuario] = useState(null);
-  // useEffect(() => {
-    const fetchData = () => {
-      if (usuario) {
-      axios.post(`http://127.0.0.1:5000/cadastrarVeiculo`, usuario)
+  
+  const editarCliente = (id) => {
+    window.location = `/editarCliente/${id}`;
+  }
+
+  const [clientes, setClientes] = useState(null);
+  const fetchData = () => {
+      axios.get(`http://127.0.0.1:5000/listarCliente`)
       .then(res => {
         console.log(res);
         console.log(res.data);
-        // setUsuario(res.data);
-      })
+        setClientes(res.data);
+      }).catch(e => console.log(e));
     }
-    }
-  //   fetchData();
-  // }, []);
-  console.log(clientes)
-  return (
-  <div>
+  
+  useEffect(() => {
+      fetchData();
+    }, []);
+
+  const deletarCliente = (id) => {
+    
+    axios.delete(`http://127.0.0.1:5000/deletarCliente`, {data: {id}})
+    .then(res => {
+      fetchData();
+    }).catch(e => console.log(e));
+  }
+    
+    console.log("Aqui", clientes)
+    return (
+      <div>
     <NavBar />
     <Table>
     <TableHead>
@@ -58,6 +56,8 @@ const ListarCliente = () => {
           <TableCell>{clien.telefone}</TableCell>
           <TableCell>{clien.email}</TableCell>
           <TableCell>{clien.senha}</TableCell>
+          <Button onClick={() => editarCliente(clien.id)} >Editar</Button>
+          <Button onClick={() => deletarCliente(clien.id)}>DELETAR</Button>
         </TableRow>
       ))}
     </Table>

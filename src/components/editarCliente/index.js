@@ -19,28 +19,51 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditarCliente = () => {
-  const [usuario, setUsuario] = useState(null);
-  // useEffect(() => {
+  const [clientes, setClientes] = useState(null);
+  const clienteId = window.location.pathname.split('/')[2];
+
     const fetchData = () => {
-      if (usuario) {
-      axios.post(`http://127.0.0.1:5000/editarCliente`, usuario)
+      if (clientes) {
+      axios.put(`http://127.0.0.1:5000/editarCliente/${clienteId}`, clientes, {      
+        headers: {                  
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization", 
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+        // "Content-Type": "application/json;charset=UTF-8"                   
+  }},)
       .then(res => {
         console.log(res);
         console.log(res.data);
-        // setUsuario(res.data);
+        // setclientes(res.data);
       })
     }
     }
-  //   fetchData();
-  // }, []);
+
+    useEffect(() => {
+      const clienteId = window.location.pathname.split('/')[2];
+      const fetchData = () => {
+          axios.get(`http://127.0.0.1:5000/listarCliente`)
+          .then(res => {
+            console.log(res);
+            console.log(res.data[0]);
+            if(res && res.data){
+              const valor = res.data;
+              console.log(valor);
+              debugger
+              setClientes(valor.map(vlr => vlr.id+"" === clienteId));
+            }
+          }).catch(e => console.log(e));
+        }
+      fetchData();
+      }, []);   
 
   const classes = useStyles();
   const onchange = (event) => {
     console.log(event)
-    setUsuario({...usuario, [event.target.name]: event.target.value});
+    setClientes({...clientes, [event.target.name]: event.target.value});
   }
 
-  console.log(usuario)
+  console.log(window.location.pathname.split('/')[2])
 
   return  (
   <div>
@@ -49,7 +72,7 @@ const EditarCliente = () => {
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>
-      <TextField name="nome" label="Nome" onChange={(event) => onchange(event)} />
+      <TextField name="nome" value={clientes && clientes.nome} label="Nome" onChange={(event) => onchange(event)} />
       </Grid>
       <Grid item xs={3}>
         <TextField name="sobrenome" label="Sobrenome" onChange={(event) => onchange(event)} />  

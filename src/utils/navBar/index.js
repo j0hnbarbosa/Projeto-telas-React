@@ -12,7 +12,7 @@ const NavBar = (props) => {
   <AppBar position="static">
     <div style={{display: 'flex', flexDirection: 'vertical', justifyContent: 'space-between'}}>
 
-      <Link to="/login" style={{color: '#CECECE'}}>LOGIN</Link>
+      {/* <Link to="/login" style={{color: '#CECECE'}}>LOGIN</Link> */}
       <Link to="/cadastrarCliente" style={{color: '#CECECE'}}>Cadastrar Cliente</Link>
       <Link to="/cadastrarUsuario" style={{color: '#CECECE'}}>Cadastrar Usuario</Link>
       <Link to="/recuperarSenhaVerificaEmail" style={{color: '#CECECE'}}>Recuperar Senha</Link>
@@ -23,6 +23,7 @@ const NavBar = (props) => {
       <Link to="/editarCliente" style={{color: '#CECECE'}}>Editar Cliente</Link>
       <Link to="/editarVeiculo" style={{color: '#CECECE'}}>Editar Veiculo</Link>
       <Link to="/sobre" style={{color: '#CECECE'}}>Sobre</Link>
+      <Link to="/" style={{color: '#CECECE'}}>SAIR</Link>
 
     </div>
   </AppBar>

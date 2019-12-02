@@ -27,7 +27,9 @@ const CadastrarUsuario = () => {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        // setUsuario(res.data);
+        if(res.data === 'sucesso') {
+          window.location = "/listarCliente"
+        }
       })
     }
     }
@@ -44,7 +46,7 @@ const CadastrarUsuario = () => {
 
   return  (
   <div>
-          <NavBar />
+          {/* <NavBar /> */}
 
   <div className={classes.root}>
     <Grid container spacing={1}>

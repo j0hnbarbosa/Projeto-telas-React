@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Link } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import NavBar from '../../utils/navBar';
+// import NavBar from '../../utils/navBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,6 +34,9 @@ const Login = () => {
       .then(res => {
         console.log(res);
         console.log('Sua Reposta', res.data);
+        if(res.data === 'sucesso') {
+          window.location = '/listarCliente';
+        }
         // setRetorno(res.data);
       })
     }
@@ -51,7 +54,7 @@ const Login = () => {
 
   return  (
   <div>
-    <NavBar />
+    {/* <NavBar /> */}
 
   <div className={classes.root}>
     <Grid container spacing={1}>
@@ -66,6 +69,9 @@ const Login = () => {
        <Grid item xs={3} />
       <Grid item xs={3}>
         <Button variant="contained" onClick={() => fetchData()}>LOGIN</Button>
+      </Grid>
+      <Grid item xs={3}>
+        <Link href="/cadastrarUsuario" style={{color: '#CECECE'}}>Cadastrar Novo usuario</Link>
       </Grid>
   </div>
   </div>
