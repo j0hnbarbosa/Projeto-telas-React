@@ -8,6 +8,10 @@ const ListarVeiculo = () => {
   // const veiculo =  veiculoTeste();
   const [veiculo, setveiculo] = useState(null);
 
+  const editarVeiculo = (id) => {
+    window.location = `/editarVeiculo/${id}`;
+  }
+
   const fetchData = () => {
     // if (usuario) {
     axios.get(`http://127.0.0.1:5000/listarVeiculo`)
@@ -53,7 +57,7 @@ const ListarVeiculo = () => {
           <TableCell>{clien.ano}</TableCell>
           <TableCell>{clien.chassis}</TableCell>
           <TableCell>{clien.cor}</TableCell>
-          <Button onClick={() => deletarVeiculo({"id": clien.id})} >Editar</Button>
+          <Button onClick={() => editarVeiculo(clien.id)} >Editar</Button>
           <Button onClick={() => deletarVeiculo(clien.id)}>DELETAR</Button>
         </TableRow>
       ))}

@@ -19,28 +19,54 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditarVeiculo = () => {
-  const [usuario, setUsuario] = useState(null);
+  const [veiculo, setVeiculo] = useState(null);
+  const veiculoId = window.location.pathname.split('/')[2];
+
   // useEffect(() => {
     const fetchData = () => {
-      if (usuario) {
-      axios.post(`http://127.0.0.1:5000/editarVeiculo`, usuario)
+      if (veiculo) {
+      axios.put(`http://127.0.0.1:5000/editarCliente/${veiculoId}`, veiculo, {      
+        headers: {                  
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization", 
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+        // "Content-Type": "application/json;charset=UTF-8"                   
+  }},)
       .then(res => {
         console.log(res);
         console.log(res.data);
-        // setUsuario(res.data);
+        // setclientes(res.data);
       })
     }
     }
   //   fetchData();
   // }, []);
 
+  useEffect(() => {
+    const VeiculoId = window.location.pathname.split('/')[2];
+    const fetchData = () => {
+        axios.get(`http://127.0.0.1:5000/listarVeiculo`)
+        .then(res => {
+          console.log(res);
+          console.log(res.data[0]);
+          if(res && res.data){
+            let valor = res.data;
+            valor = valor.filter(vlr => vlr.id+"" === VeiculoId)
+            console.log(valor);
+            setVeiculo({...valor[0]});
+          }
+        }).catch(e => console.log(e));
+      }
+    fetchData();
+    }, []);   
+
   const classes = useStyles();
   const onchange = (event) => {
     console.log(event)
-    setUsuario({...usuario, [event.target.name]: event.target.value});
+    setVeiculo({...veiculo, [event.target.name]: event.target.value});
   }
 
-  console.log(usuario)
+  console.log(veiculo)
 
   return  (
   <div>
@@ -49,22 +75,22 @@ const EditarVeiculo = () => {
   <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={3}>
-      <TextField name="marca" label="Marca" onChange={(event) => onchange(event)} />
+      <TextField name="marca" value={veiculo && veiculo.marca} onChange={(event) => onchange(event)} />
       </Grid>
       <Grid item xs={3}>
-        <TextField name="fabricante" label="Fabricante" onChange={(event) => onchange(event)} />  
+        <TextField name="fabricante" value={veiculo && veiculo.fabricante}  onChange={(event) => onchange(event)} />  
       </Grid>
       <Grid item xs={3}>
-        <TextField name="ano" label="Ano" onChange={(event) => onchange(event)} />
+        <TextField name="ano" value={veiculo && veiculo.ano}  onChange={(event) => onchange(event)} />
       </Grid>
     </Grid>
 
     <Grid container spacing={1}>
     <Grid item xs={3}>
-        <TextField name="chassis" label="Chassis" onChange={(event) => onchange(event)} />
+        <TextField name="chassis" value={veiculo && veiculo.chassis}  onChange={(event) => onchange(event)} />
       </Grid>
       <Grid item xs={3}>
-        <TextField name="cor" label="Cor" onChange={(event) => onchange(event)} />
+        <TextField name="cor" value={veiculo && veiculo.cor} onChange={(event) => onchange(event)} />
     </Grid>
     <Grid item xs={3}>
         <Button variant="contained" onClick={() => fetchData()}>salvar</Button>

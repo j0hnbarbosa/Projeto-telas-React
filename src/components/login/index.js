@@ -2,14 +2,17 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Link } from '@material-ui/core';
+import { Button, Link, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 // import NavBar from '../../utils/navBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
-
+    display: 'flex',
+    justifyContent: 'center',
     margin: '30px',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   paper: {
     padding: theme.spacing(2),
@@ -53,26 +56,28 @@ const Login = () => {
   console.log(usuario)
 
   return  (
-  <div>
-    {/* <NavBar /> */}
-
   <div className={classes.root}>
+    {/* <NavBar /> */}
+        <Typography>
+          Trabalho Python
+        </Typography>
+
+  <div style={{background: '#FAFBFB', padding: '30px',marginTop: '30px', width: '400px',height: '100px', border: 'solid 1px #CECECE',borderRadius: '5px'}}>
     <Grid container spacing={1}>
+      
       <Grid item xs={3}>
-      <TextField name="email" label="Email" onChange={(event) => onchange(event)} />
+        <TextField name="email" label="Email" onChange={(event) => onchange(event)} />
       </Grid>
       <Grid item xs={3}>
         <TextField name="senha" label="Senha" onChange={(event) => onchange(event)} />  
       </Grid>
+      <Grid item xs={3}>
+        <Button variant="contained" onClick={() => fetchData()}>LOGIN</Button>
+        <Link href="/cadastrarUsuario" style={{color: '#CECECE', fontSize: '16px'}}>Cadastrar Novo usuario</Link>
+      </Grid>
     </Grid>
 
        <Grid item xs={3} />
-      <Grid item xs={3}>
-        <Button variant="contained" onClick={() => fetchData()}>LOGIN</Button>
-      </Grid>
-      <Grid item xs={3}>
-        <Link href="/cadastrarUsuario" style={{color: '#CECECE'}}>Cadastrar Novo usuario</Link>
-      </Grid>
   </div>
   </div>
 )
